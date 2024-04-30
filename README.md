@@ -37,10 +37,10 @@ The WireGuard even supports a pre-shared key that adds another layer of symmetri
 Set-up from the command line using the ip and wg commands or by creating the configuration file with a text editor.
 
 3) Next, create a new file as wg0.conf. Proceed to add the below contents:
-```
+```sh
 sudo nano /etc/wireguard/wg0.conf
 ```
-```
+```sh
 [Interface]
 Address = 10.0.0.1/24
 SaveConfig = true
@@ -75,20 +75,20 @@ sudo wg-quick up wg0
 The command will show an output similar to:
 
 Output
-
+```text
     ip link add wg0 type wireguard
     wg setconf wg0 /dev/fd/63
     ip -4 address add 10.0.0.1/24 dev wg0
     ip link set mtu 1420 up dev wg0
     iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
-
+```
 
 7) Continue to check the interface state and configuration using:
-```
+```sh
 sudo wg show wg0
 ```
 Output
-```
+```sh
 interface: wg0
   public key: r3imyh3MCYggaZACmkx+CxlD6uAmICI8pe/PGq8+qCg=
   private key: (hidden)
@@ -96,17 +96,17 @@ interface: wg0
 ```
 
 8) Run ip a show wg0 to verify the interface state:
-...
+```sh
     ip a show wg0
-...
+```
 
 Output
-...
+```sh
 4: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
     link/none 
     inet 10.0.0.1/24 scope global wg0
        valid_lft forever preferred_lft forever
-...
+```
 
 The WireGuard can also get managed with Systemd.
 
