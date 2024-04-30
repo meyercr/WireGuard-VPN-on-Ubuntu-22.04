@@ -94,9 +94,12 @@ interface: wg0
   private key: (hidden)
   listening port: 51820
 ```
+
 8) Run ip a show wg0 to verify the interface state:
 
+...
 ip a show wg0
+...
 
 Output
 ...
