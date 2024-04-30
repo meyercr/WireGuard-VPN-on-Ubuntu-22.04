@@ -71,16 +71,17 @@ sudo chmod 600 /etc/wireguard/{privatekey,wg0.conf}
 ```
 sudo wg-quick up wg0
 ```
+
 The command will show an output similar to:
 
 Output
-...
+
     ip link add wg0 type wireguard
     wg setconf wg0 /dev/fd/63
     ip -4 address add 10.0.0.1/24 dev wg0
     ip link set mtu 1420 up dev wg0
     iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
-...
+
 
 7) Continue to check the interface state and configuration using:
 ```
