@@ -96,9 +96,8 @@ interface: wg0
 ```
 
 8) Run ip a show wg0 to verify the interface state:
-
 ...
-ip a show wg0
+    ip a show wg0
 ...
 
 Output
