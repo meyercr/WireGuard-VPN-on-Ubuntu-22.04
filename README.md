@@ -75,11 +75,11 @@ The command will show an output similar to:
 
 Output
 ...
-ip link add wg0 type wireguard
-wg setconf wg0 /dev/fd/63
-ip -4 address add 10.0.0.1/24 dev wg0
-ip link set mtu 1420 up dev wg0
-iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+    ip link add wg0 type wireguard
+    wg setconf wg0 /dev/fd/63
+    ip -4 address add 10.0.0.1/24 dev wg0
+    ip link set mtu 1420 up dev wg0
+    iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 ...
 
 7) Continue to check the interface state and configuration using:
@@ -98,11 +98,12 @@ interface: wg0
 ip a show wg0
 
 Output
-
+...
 4: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
     link/none 
     inet 10.0.0.1/24 scope global wg0
        valid_lft forever preferred_lft forever
+...
 
 The WireGuard can also get managed with Systemd.
 
@@ -127,6 +128,7 @@ Output
 ```
 net.ipv4.ip_forward = 1
 ```
+
 3) Open the UDP traffic on port 51820 if you are using UFW to manage the firewall:
 ```
 sudo ufw allow 51820/udp
