@@ -134,7 +134,9 @@ net.ipv4.ip_forward = 1
 ```
 sudo ufw allow 51820/udp
 ```
+
 Finally, an Ubuntu peer that will act as a server is set up.
+
 Step 4 – Linux and macOS Clients Setup
 
 1) You can check the installation instructions for all supported platforms at https://wireguard.com/install/. Install the package using the distribution package manager and brew for macOS.
