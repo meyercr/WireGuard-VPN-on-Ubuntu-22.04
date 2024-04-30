@@ -179,12 +179,14 @@ PublicKey = SERVER_PUBLIC_KEY
 Endpoint = SERVER_IP_ADDRESS:51820
 AllowedIPs = 0.0.0.0/0
 ```
+
 In this interface section, you will add a new line. It will define the client tunnel Address. Even, in the peer section, add the below fields:
 ```
     PublicKey - The public key of Ubuntu server /etc/wireguard/publickey file.
     Endpoint - IP address of the Ubuntu server along with a colon and the WireGuard port (51820).
     The AllowedIPs - 0.0.0.0/0
 ```
+
 5) After this, click on the Save button.
 Step 6 - Add the Client Peer to Server
 
