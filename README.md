@@ -144,15 +144,16 @@ Step 4 – Linux and macOS Clients Setup
 1) You can check the installation instructions for all supported platforms at https://wireguard.com/install/. Install the package using the distribution package manager and brew for macOS.
 
 2) Next, to set up process for a Linux and macOS client is the same as earlier. First, you will generate public and private keys:
-```
+```sh
 wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
 ```
+
 3) Then, create the file wg0.conf and add below contents:
-```
+```sh
 sudo nano /etc/wireguard/wg0.conf
 ```
 Output
-```
+```text
 [Interface]
 PrivateKey = CLIENT_PRIVATE_KEY
 Address = 10.0.0.2/24
@@ -163,6 +164,7 @@ PublicKey = SERVER_PUBLIC_KEY
 Endpoint = SERVER_IP_ADDRESS:51820
 AllowedIPs = 0.0.0.0/0
 ```
+
 If you want to configure the additional clients. You will repeat the same steps. Do it using a different private IP address.
 Step 5 - Windows Clients Setup
 
@@ -173,7 +175,8 @@ Step 5 - Windows Clients Setup
 3) A publickey pair is created automatically and gets displayed on the screen.
 
 4) After that, enter a name for the tunnel and edit the configuration as follows:
-```
+
+```text
 [Interface]
 PrivateKey = CLIENT_PRIVATE_KEY
 Address = 10.0.0.2/24
@@ -186,7 +189,7 @@ AllowedIPs = 0.0.0.0/0
 ```
 
 In this interface section, you will add a new line. It will define the client tunnel Address. Even, in the peer section, add the below fields:
-```
+```text
     PublicKey - The public key of Ubuntu server /etc/wireguard/publickey file.
     Endpoint - IP address of the Ubuntu server along with a colon and the WireGuard port (51820).
     The AllowedIPs - 0.0.0.0/0
@@ -196,7 +199,7 @@ In this interface section, you will add a new line. It will define the client tu
 Step 6 - Add the Client Peer to Server
 
 1) The Final step is to add the client’s public key and IP address to the server. So, run the below command on the Ubuntu server:
-```
+```sh
 sudo wg set wg0 peer CLIENT_PUBLIC_KEY allowed-ips 10.0.0.2
 ```
 2) Remember to change CLIENT_PUBLIC_KEY with the public key that you generated on client machine sudo cat /etc/wireguard/publickey. Further, adjust the client IP address, if different. The Windows users can copy the public key from the WireGuard application.
@@ -205,13 +208,14 @@ sudo wg set wg0 peer CLIENT_PUBLIC_KEY allowed-ips 10.0.0.2
 Step 7 – Linux and the macOS Clients
 
 1) You will now run the below command to bring up the interface:
-```
+```sh
 sudo wg-quick up wg0
 ```
 2) Now you will get connected to Ubuntu server and traffic from your client machine should get routed from it. You can check the connection using the following command:
-```
+```sh
 sudo wg
 ```
+```text
 interface: wg0
   public key: gFeK6A16ncnT1FG6fJhOCMPMeY4hZa97cZCNWis7cSo=
   private key: (hidden)
@@ -223,9 +227,10 @@ peer: r3imyh3MCYggaZACmkx+CxlD6uAmICI8pe/PGq8+qCg=
   allowed ips: 0.0.0.0/0
   latest handshake: 53 seconds ago
   transfer: 3.23 KiB received, 3.50 KiB sent
+```
 
 3) Open your browser and type “what is my ip”. You will be able to see your Ubuntu server IP address. Now, to stop tunneling, bring down the wg0 interface:
-```
+```sh
 sudo wg-quick down wg0
 ```
 Step 8 – Windows Clients
